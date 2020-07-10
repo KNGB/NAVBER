@@ -106,7 +106,8 @@ export default {
       })
     },
     handleLogin() {
-      this.$refs.loginForm.validate(valid => {
+      this.$router.push({ path: this.redirect || '/' })
+      /* this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
           this.$store.dispatch('user/login', this.loginForm).then(() => {
@@ -119,7 +120,7 @@ export default {
           console.log('error submit!!')
           return false
         }
-      })
+      }) */
     }
   }
 }
