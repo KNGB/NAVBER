@@ -34,7 +34,7 @@ export default {
       this.$store.dispatch('app/setSize', size)
       this.refreshView()
       this.$message({
-        message: 'Switch Size Success',
+        message: 'Switch Size Success，but you need login again!',
         type: 'success'
       })
     },

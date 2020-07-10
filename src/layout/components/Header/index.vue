@@ -10,7 +10,9 @@
         </el-col>
         <el-col :span="16">
             <div class="grid-content heightToGrid ">
-                <div v-for="(item,index) in nav" :key="index" class="navItem">{{item.title}}</div>
+                <div v-for="(item,index) in nav" :key="index" :class="index===activeIndex ? 'navItem active':'navItem '"
+                @click="reqNav(index,item)"
+                >{{item.title}}</div>
             </div>
         </el-col>
         <el-col :span="4" class="hidden-sm-and-down">
@@ -52,7 +54,7 @@ import { mapGetters } from 'vuex'
 import LangSelect from '@/components/LangSelect'
 import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect' 
-import {ADD_ROUTE,resetRouter} from '@/router'
+import {ADD_ROUTE} from '@/router'
 import router from '@/router'
 export default {
     name: "",
@@ -66,49 +68,10 @@ export default {
     props: [],
     data() {
         return {
+            activeIndex:4,
             squareUrl: "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
             index:8,
-            nav:[
-                {
-                    title:'导航一'
-                },
-                {
-                    title:'导航二'
-                },
-                {
-                    title:'导航三'
-                },
-                {
-                    title:'导航四'
-                },
-                {
-                    title:'导航五'
-                },
-                {
-                    title:'导航六'
-                },
-                {
-                    title:'导航七'
-                },
-                {
-                    title:'导航七'
-                },
-                {
-                    title:'导航七'
-                },
-                {
-                    title:'导航七'
-                },
-                {
-                    title:'导航七'
-                },
-                {
-                    title:'导航七'
-                },
-                {
-                    title:'导航七'
-                },
-            ]
+            nav:[],
         };
     },
     computed: {
@@ -118,20 +81,54 @@ export default {
         ])
     },
     watch: {},
-    created() {},
-    mounted() {},
+    created() {
+         //读取json文件
+        //赋值
+         this.nav = [
+                {
+                    title:'导航一',
+                    id:1,
+                },
+                {
+                    title:'导航二',
+                    id:2,
+                },
+                {
+                    title:'导航三',
+                    id:3,
+                },
+                {
+                    title:'导航四',
+                    id:4,
+                },
+                {
+                    title:'导航五',
+                    id:5,
+                },
+                {
+                    title:'导航六',
+                    id:6,
+                },
+                
+            ]
+    },
+    mounted() {
+
+    },
     methods: {
-        add(){
-            ADD_ROUTE()
-            this.$emit('changRoute')
-        },
         toggleSideBar() {
             this.$store.dispatch('app/toggleSideBar')
             },
         async logout() {
             await this.$store.dispatch('user/logout')
             this.$router.push(`/login?redirect=${this.$route.fullPath}`)
-            }
+        },
+        reqNav(index,item){
+            this.activeIndex=index;
+            // 修改路由
+            ADD_ROUTE(item.id)
+            this.$emit('changRoute')
+        }
     }
 };
 </script>
@@ -166,6 +163,9 @@ export default {
         &:hover{
             background-color:  #29384b;
         }
+    }
+    .active{
+        background: #304156f3;
     }
     .right-menu {
         height: 70px;

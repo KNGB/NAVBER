@@ -141,7 +141,9 @@ export const constantRoutes =
   { path: '*', redirect: '/404', hidden: true }
 ]
 
-export const ADD_ROUTE =(route)=>{
+export const ADD_ROUTE =(id)=>{
+  //发送请求 
+  //req(id)
   const routes = [
     {
         path: '/add',
@@ -156,20 +158,11 @@ export const ADD_ROUTE =(route)=>{
         ]
     }
 ]
-constantRoutes.splice(3,1,{
-  path: '/add',
-  component: Layout,
-  children: [
-  {
-      path: 'index',
-      name: 'add',
-      component:dashboard,
-      meta: { title: 'add', icon: 'form' }
-  }
-  ]
-})
+// index  delete  new
+constantRoutes.splice(4,constantRoutes.length-3,
+  ...routes
+)
 resetRouter();
-
 }
 const createRouter = () => new Router({
   scrollBehavior: () => ({ y: 0 }),
