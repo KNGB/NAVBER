@@ -1,5 +1,11 @@
 // cover some element-ui styles
-
+.el-container {
+  width: 100%;
+  height: 100%;
+}
+.el-main{
+  padding: 0!important;
+}
 .el-breadcrumb__inner,
 .el-breadcrumb__inner a {
   font-weight: 400 !important;

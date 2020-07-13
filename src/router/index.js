@@ -61,7 +61,7 @@ export const constantRoutes =
         path: 'tree',
         name: 'Tree',
         component: () => import('@/views/dashboard/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        meta: { title: 'Tree', icon: 'tree',url:'http://demo.gofusion.cn/dataanalysis/bi/page/webtools/base/DataanalysisModel.html' }
       }
     ]
   },
@@ -74,7 +74,7 @@ export const constantRoutes =
         path: 'index',
         name: 'Form',
         component:() => import('@/views/dashboard/index'),
-        meta: { title: 'Form', icon: 'form' }
+        meta: { title: 'Form', icon: 'form',url:'http://demo.gofusion.cn/dataanalysis/bi/page/webtools/base/DataanalysisModel.html' }
       }
     ]
   },

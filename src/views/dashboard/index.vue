@@ -1,30 +1,49 @@
 <template>
-  <div class="dashboard-container">
-    <div class="dashboard-text">主页</div>
-  </div>
+	<div id="iframeOrVueMian ">
+    <v-iframe :url='url'  ></v-iframe>
+	</div>
+
 </template>
 
-<script>
-import { mapGetters } from 'vuex'
+<script type="text/ecmascript-6">
+	import VIframe from '@/components/iframe'
+	export default {
+		components: {
+			VIframe
+		},
+		data() {
+			return {
 
-export default {
-  name: 'Dashboard',
-  computed: {
-    ...mapGetters([
-      'name'
-    ])
-  }
-}
+			}
+		},
+		mounted() {
+
+		},
+		updated() {},
+		methods: {},
+		computed: {
+			url(){
+				return this.$route.meta.url ||'http://test.gofusion.cn:8099/yxjjck/page/fzdl/chukou/chukou.html'
+			}
+		},
+		watch: {
+
+		}
+	}
 </script>
 
-<style lang="scss" scoped>
-.dashboard {
-  &-container {
-    margin: 30px;
-  }
-  &-text {
-    font-size: 30px;
-    line-height: 46px;
-  }
-}
+<style scoped lang="scss">
+	#iframeOrVueMian {
+    height: 100%;
+		background-color: #F0F2FA;
+		&:after {
+			content: ".";
+			display: block;
+			height: 0;	
+			clear: both;
+			visibility: hidden;
+			
+		}
+	}
 </style>
+
