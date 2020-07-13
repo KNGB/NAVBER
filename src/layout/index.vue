@@ -5,8 +5,8 @@
     <sidebar class="sidebar-container" :isResetTheRoute="isResetTheRoute"/>
     <div class="main-container">
       <div :class="{'fixed-header':fixedHeader}">
-        <navbar />
-        <tags-view />
+        <navbar :isResetTheRoute="isResetTheRoute"/>
+        <tags-view :isResetTheRoute="isResetTheRoute"/>
       </div>
       <app-main />
     </div>

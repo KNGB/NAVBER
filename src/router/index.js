@@ -146,7 +146,8 @@ export const ADD_ROUTE =(id)=>{
   //req(id)
   const routes = [
     {
-        path: '/add',
+        path: '/',
+        redirect: '/index',  
         component: Layout,
         children: [
         {
@@ -156,10 +157,22 @@ export const ADD_ROUTE =(id)=>{
             meta: { title: 'add', icon: 'form' }
         }
         ]
+    },
+    {
+        path: '/add1',
+        component: Layout,
+        children: [
+        {
+            path: 'index',
+            name: 'add2',
+            component:dashboard,
+            meta: { title: 'add2', icon: 'form' }
+        }
+        ]
     }
 ]
 // index  delete  new
-constantRoutes.splice(4,constantRoutes.length-3,
+constantRoutes.splice(3,constantRoutes.length-3,
   ...routes
 )
 resetRouter();

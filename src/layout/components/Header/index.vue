@@ -128,6 +128,12 @@ export default {
             // 修改路由
             ADD_ROUTE(item.id)
             this.$emit('changRoute')
+            this.$store.dispatch('tagsView/delAllViews').then(({ visitedViews }) => {
+                if (this.affixTags.some(tag => tag.path === view.path)) {
+                return
+                }
+                this.toLastView(visitedViews, view)
+            })
         }
     }
 };
@@ -146,7 +152,8 @@ export default {
     .heightToGrid{
         height: 70px;
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
+        
         align-items: center;
         color: #BFCBD9;
         h1{
@@ -159,6 +166,7 @@ export default {
         height: 70px;
         line-height: 70px;
         text-align: center;
+        //padding: 0 10px;
         flex-grow:1;// Average allocation of surplus space
         &:hover{
             background-color:  #29384b;

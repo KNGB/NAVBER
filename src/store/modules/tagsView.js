@@ -36,6 +36,7 @@ const mutations = {
     state.visitedViews = state.visitedViews.filter(v => {
       return v.meta.affix || v.path === view.path
     })
+    
   },
   DEL_OTHERS_CACHED_VIEWS: (state, view) => {
     const index = state.cachedViews.indexOf(view.name)

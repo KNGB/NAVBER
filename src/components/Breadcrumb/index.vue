@@ -13,12 +13,16 @@
 import pathToRegexp from 'path-to-regexp'
 
 export default {
+  props:['isResetTheRoute'],
   data() {
     return {
       levelList: null
     }
   },
   watch: {
+    isResetTheRoute(){
+      this.getBreadcrumb()
+    },
     $route() {
       this.getBreadcrumb()
     }
