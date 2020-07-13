@@ -4,7 +4,7 @@
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
     <sidebar class="sidebar-container" :isResetTheRoute="isResetTheRoute"/>
     <div class="main-container"  >
-      <div class="resize" @mousemove="resizeTheLeft"></div>
+      <div class="resize"  @mousedown="resizeTheLeft($event)" ></div>
       <div :class="{'fixed-header':fixedHeader}">
         <navbar :isResetTheRoute="isResetTheRoute"/>
         <tags-view :isResetTheRoute="isResetTheRoute"/>
@@ -32,6 +32,7 @@ export default {
   mixins: [ResizeMixin],
   data(){
     return {
+      isMouseDown:false,
       isResetTheRoute:false,
     }
   },
@@ -54,7 +55,26 @@ export default {
   },
   methods: {
     resizeTheLeft(){
-
+      this.isMouseDown=true;
+      const _this  = this;
+      if(this.isMouseDown){
+        console.log('鼠标按下了了')
+        let domResize  = this.$el.getElementsByClassName("resize")[0];
+        let startX  = domResize.getBoundingClientRect().x;
+        // 鼠标拖动事件
+            document.onmousemove = function (e) {
+              let endX = e.clientX;
+              console.log(endX)
+              document.documentElement.style.setProperty('--sideBarWidth',endX+'px');
+            }
+        // 鼠标松开事件
+            document.onmouseup = function (evt) {
+              console.log('鼠标松开了')
+              _this.isMouseDown = false;
+              document.onmousemove = null;
+              document.onmouseup = null;
+            }
+      }
     },
     handleClickOutside() {
       this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })

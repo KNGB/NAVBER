@@ -24,7 +24,7 @@
 
   .sidebar-container {
     transition: width 0.28s;
-    width: var(--sideBarWidth) !important;
+    width: var(--sideBarWidth) ;
     background-color: $menuBg;
     height: 100%;
     position: fixed;
@@ -97,7 +97,7 @@
 
     & .nest-menu .el-submenu>.el-submenu__title,
     & .el-submenu .el-menu-item {
-      min-width: var(--sideBarWidth) !important;
+      min-width: var(--sideBarWidth) ;
       background-color: $subMenuBg !important;
 
       &:hover {
@@ -168,7 +168,7 @@
   }
 
   .el-menu--collapse .el-menu .el-submenu {
-    min-width: var(--sideBarWidth) !important;
+    min-width: var(--sideBarWidth) ;
   }
 
   // mobile responsive
@@ -179,7 +179,7 @@
 
     .sidebar-container {
       transition: transform .28s;
-      width: var(--sideBarWidth) !important;
+      width: var(--sideBarWidth);
     }
 
     &.hideSidebar {
