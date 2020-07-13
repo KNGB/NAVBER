@@ -7,6 +7,19 @@
     padding-top: 70px;
     box-sizing: border-box;
     position: relative;
+    .resize{
+      position: absolute;
+      left: -3px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 101;
+      border-radius: 2px;
+      cursor: w-resize;
+      background-color: #666;
+      border-radius: 5px;
+      width: 6px;
+      height: 20px;
+    }
   }
 
   .sidebar-container {
@@ -19,7 +32,7 @@
     top: 70px;
     bottom: 0;
     left: 0;
-    z-index: 1001;
+    z-index: 100;
     overflow: hidden;
 
     // reset element-ui css

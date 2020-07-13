@@ -3,7 +3,8 @@
     <Header @changRoute='changRoute'/>
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
     <sidebar class="sidebar-container" :isResetTheRoute="isResetTheRoute"/>
-    <div class="main-container">
+    <div class="main-container"  >
+      <div class="resize" @mousemove="resizeTheLeft"></div>
       <div :class="{'fixed-header':fixedHeader}">
         <navbar :isResetTheRoute="isResetTheRoute"/>
         <tags-view :isResetTheRoute="isResetTheRoute"/>
@@ -52,6 +53,9 @@ export default {
     }
   },
   methods: {
+    resizeTheLeft(){
+      
+    },
     handleClickOutside() {
       this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
     },
