@@ -4,7 +4,7 @@
         <el-col :span="4" class="hidden-sm-and-down">
             <div class="grid-content heightToGrid">
                 <div style="width:228px;height:41px">
-                    <h1>LOGO LOGO</h1>
+                    <h1><img src="http://demo.gofusion.cn/nav/sys/systemmanager/images/backsysLogo.png" alt=""></h1>
                 </div>
             </div>
         </el-col>
@@ -33,11 +33,7 @@
                         <div class="right-menu-item"><el-avatar shape="square"  :src="squareUrl"></el-avatar></div>
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>
-                            <router-link to="/">
-                            Home
-                        </router-link></el-dropdown-item>
-                        <el-dropdown-item>Log In</el-dropdown-item>
+                        <el-dropdown-item @click.native="logout">Log In</el-dropdown-item>
                         <el-dropdown-item divided  @click.native="logout">Log Out</el-dropdown-item>
                     </el-dropdown-menu>
                     </el-dropdown>
@@ -50,7 +46,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters,mapMutations } from 'vuex'
 import LangSelect from '@/components/LangSelect'
 import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect' 
@@ -78,7 +74,7 @@ export default {
          ...mapGetters([
         'sidebar',
         'avatar'
-        ])
+        ]),
     },
     watch: {},
     created() {
@@ -127,13 +123,10 @@ export default {
             this.activeIndex=index;
             // 修改路由
             ADD_ROUTE(item.id)
-            this.$emit('changRoute')
-            this.$store.dispatch('tagsView/delAllViews').then(({ visitedViews }) => {
-                if (this.affixTags.some(tag => tag.path === view.path)) {
-                return
-                }
-                this.toLastView(visitedViews, view)
-            })
+            //提示导航栏的路由即将改变
+            this.$store.commit('app/SET_ROUTE',true);
+            this.$store.dispatch('tagsView/delAllViews');
+            
         }
     }
 };

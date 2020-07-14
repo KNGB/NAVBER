@@ -12,34 +12,41 @@
         :collapse-transition="false"
         mode="vertical"
       >
-        <sidebar-item v-for="route in this.$router.options.routes" :key="route.path" :item="route" :base-path="route.path" />
+        <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" />
       </el-menu>
     </el-scrollbar>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters,mapState } from 'vuex'
 import Logo from './Logo'
 import SidebarItem from './SidebarItem'
 import variables from '@/styles/variables.scss'
 
 export default {
-  props:['isResetTheRoute'],
   components: { SidebarItem, Logo },
   data(){
     return{
-      routes:[],
+     
     }
   },
   computed: {
     ...mapGetters([
       'sidebar'
     ]),
-    /* routes() {
-      console.log('===========',this.$router.options.routes)
-      return this.$router.options.routes
-    }, */
+    ...mapState(
+      {routeReset:state=>state.app.routeReset}
+    ),
+    routes: {
+      get(){
+        return this.$router.options.routes
+      },
+      set(){
+
+      },
+      
+    },
     activeMenu() {
       const route = this.$route
       const { meta, path } = route
@@ -60,11 +67,12 @@ export default {
     }
   },
   watch:{
-    isResetTheRoute(val){
+    routeReset(val){
       if(val){
-        console.log(this.$router.options.routes,'sjdjhashdjkhsakjhdkj')
+       // console.log(this.$router.options.routes,'sjdjhashdjkhsakjhdkj')
         this.routes=this.$router.options.routes;
         this.$forceUpdate()  
+
       }
     }
   }

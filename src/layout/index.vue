@@ -1,10 +1,12 @@
 <template>
   <div :class="classObj" class="app-wrapper">
-    <Header @changRoute='changRoute'/>
+    
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
     <sidebar class="sidebar-container" :isResetTheRoute="isResetTheRoute"/>
     <div class="main-container"  >
-      <div class="resize"  @mousedown="resizeTheLeft($event)" ></div>
+      <div class="resize"  draggable="true" @drag="resizeTheLeft($event)" @dragend="resizeTheLeft($event)">
+        <div class="resizeShow"></div>
+      </div>
       <div :class="{'fixed-header':fixedHeader}">
         <navbar :isResetTheRoute="isResetTheRoute"/>
         <tags-view :isResetTheRoute="isResetTheRoute"/>
@@ -17,7 +19,6 @@
 <script>
 import { Navbar, Sidebar, AppMain,Settings,TagsView} from './components'
 import ResizeMixin from './mixin/ResizeHandler'
-import Header from './components/Header'
 import { mapState } from 'vuex'
 export default {
   name: 'Layout',
@@ -25,7 +26,7 @@ export default {
     Navbar,
     Sidebar,
     AppMain,
-    Header,
+    
     TagsView,
     Settings
   },
@@ -33,11 +34,11 @@ export default {
   data(){
     return {
       isMouseDown:false,
-      isResetTheRoute:false,
     }
   },
   computed: {
     ...mapState({
+      isResetTheRoute:state => state.isResetTheRoute,
       sidebar: state => state.app.sidebar,
       device: state => state.app.device,
       showSettings: state => state.settings.showSettings,
@@ -54,33 +55,11 @@ export default {
     }
   },
   methods: {
-    resizeTheLeft(){
-      this.isMouseDown=true;
-      const _this  = this;
-      if(this.isMouseDown){
-        console.log('鼠标按下了了')
-        let domResize  = this.$el.getElementsByClassName("resize")[0];
-        let startX  = domResize.getBoundingClientRect().x;
-        // 鼠标拖动事件
-            document.onmousemove = function (e) {
-              let endX = e.clientX;
-              console.log(endX)
-              document.documentElement.style.setProperty('--sideBarWidth',endX+'px');
-            }
-        // 鼠标松开事件
-            document.onmouseup = function (evt) {
-              console.log('鼠标松开了')
-              _this.isMouseDown = false;
-              document.onmousemove = null;
-              document.onmouseup = null;
-            }
-      }
+    resizeTheLeft(e){
+       document.documentElement.style.setProperty('--sideBarWidth',e.clientX+'px');
     },
     handleClickOutside() {
       this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
-    },
-    changRoute(){
-      this.isResetTheRoute = true;
     }
   }
 }

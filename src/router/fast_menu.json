@@ -1,0 +1,50 @@
+[{
+      "xh": "40",
+      "id": "a39dc083320e40cfa51c00929a2f514a",
+      "pid": "0",
+      "text": "快捷菜单",
+      "frameurl": ""
+    },
+    {
+      "xh": "1",
+      "id": "92fcd116b0db4d098f46754bc8f26393",
+      "pid": "a39dc083320e40cfa51c00929a2f514a",
+      "text": "总览",
+      "frameurl": "/page/common/overview/overView.jsp"
+    },
+    {
+      "xh": "2",
+      "id": "b92eb2aaf4404cf18e9e6fd6bdbeac05",
+      "pid": "a39dc083320e40cfa51c00929a2f514a",
+      "text": "数据采集",
+      "frameurl": ""
+    },
+    {
+      "xh": "3",
+      "id": "d0377e05a2b14d4191c5783fa12dda21",
+      "pid": "a39dc083320e40cfa51c00929a2f514a",
+      "text": "元数据",
+      "frameurl": ""
+    },
+    {
+      "xh": "4",
+      "id": "44fb4b564ee141948877de0950a80a32",
+      "pid": "a39dc083320e40cfa51c00929a2f514a",
+      "text": "资源整合",
+      "frameurl": ""
+    },
+    {
+      "xh": "5",
+      "id": "2e5aeae3cbe84439857cd3662b8c1338",
+      "pid": "a39dc083320e40cfa51c00929a2f514a",
+      "text": "数据治理",
+      "frameurl": ""
+    },
+    {
+      "xh": "6",
+      "id": "61a2ed25263d40d895adf9161536b011",
+      "pid": "a39dc083320e40cfa51c00929a2f514a",
+      "text": "管理监控",
+      "frameurl": ""
+    }
+]

@@ -1,6 +1,9 @@
 <template>
 	<div id="iframeOrVueMian ">
-    <v-iframe :url='url'  ></v-iframe>
+		<!-- <div class="zhezhao">
+			
+		</div> -->
+    	<v-iframe :url='url'  ></v-iframe>
 	</div>
 
 </template>
@@ -33,8 +36,19 @@
 </script>
 
 <style scoped lang="scss">
+.zhezhao{
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	z-index: 100;
+	width: 100%;
+	background: transparent;
+}
 	#iframeOrVueMian {
-    height: 100%;
+	height: 100%;
+	position: relative;
+		
 		background-color: #F0F2FA;
 		&:after {
 			content: ".";
