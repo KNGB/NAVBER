@@ -134,13 +134,10 @@ export default {
 
 <style lang="scss" scoped>
 .Header{
-    position: absolute;
-    top: 0;
-    right: 0;
     background: #304156f3;
     width: 100%;
     height: 70px;
-    z-index: 100;
+    z-index: 200;
     overflow-x: auto;
     .heightToGrid{
         height: 70px;
