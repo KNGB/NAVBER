@@ -25,7 +25,6 @@ export const constantRoutes =
     component: () => import('@/views/login/index'),
     hidden: true
   },
-
   {
     path: '/404',
     component: () => import('@/views/404'),
@@ -36,12 +35,10 @@ export const constantRoutes =
     component: () => import('@/views/onePage/index'),
     hidden: true
   },
-
-
   {
-    path: '/',
+    path:'/dashboard',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/dashboard/dashboard',
     children: [{
       path: 'dashboard',
       name: 'Dashboard',

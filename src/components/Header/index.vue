@@ -12,7 +12,7 @@
             <div class="grid-content heightToGrid ">
                 <div v-for="(item,index) in nav" :key="index" :class="index===activeIndex ? 'navItem active':'navItem '"
                 @click="reqNav(index,item)"
-                >{{item.title}}</div>
+                >{{item.text}}</div>
             </div>
         </el-col>
         <el-col :span="4" class="hidden-sm-and-down">
@@ -52,6 +52,7 @@ import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect' 
 import {ADD_ROUTE} from '@/router'
 import router from '@/router'
+import nav from  './../../router/fast_menu.json'
 export default {
     name: "",
     components: {
@@ -67,7 +68,7 @@ export default {
             activeIndex:4,
             squareUrl: "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
             index:8,
-            nav:[],
+            nav,
         };
     },
     computed: {
@@ -78,35 +79,7 @@ export default {
     },
     watch: {},
     created() {
-         //读取json文件
-        //赋值
-         this.nav = [
-                {
-                    title:'导航一',
-                    id:1,
-                },
-                {
-                    title:'导航二',
-                    id:2,
-                },
-                {
-                    title:'导航三',
-                    id:3,
-                },
-                {
-                    title:'导航四',
-                    id:4,
-                },
-                {
-                    title:'导航五',
-                    id:5,
-                },
-                {
-                    title:'导航六',
-                    id:6,
-                },
-                
-            ]
+        
     },
     mounted() {
 
@@ -122,7 +95,7 @@ export default {
         reqNav(index,item){
             this.activeIndex=index;
             // 修改路由
-            ADD_ROUTE(item.id)
+            ADD_ROUTE(item)
             //提示导航栏的路由即将改变
             this.$store.commit('app/SET_ROUTE',true);
             this.$store.dispatch('tagsView/delAllViews');
