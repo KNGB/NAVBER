@@ -1,3 +1,17 @@
+
+import Layout from '@/layout'
+import dashboard from '@/views/dashboard/index'
+let pinyin = require("pinyin");
+let py = (str)=>{
+
+	const array =pinyin(str,{style:pinyin.STYLE_NORMAL});
+	let py = ''
+	for (let index = 0; index < array.length; index++) {
+		const element = array[index];
+		py = py+element;
+	}
+	return py
+}
 const Json  =[{
 	"id": "d74d41d3bb6a455d974d473ce6fa1bd5",
 	"pid": "0",
@@ -623,25 +637,121 @@ const Json  =[{
 	"xtid": "metadata"
 }]
 
-let res = FlatToNested(Json);
-let routeArr = [];
-function resetRoute(data){
-  let RouteItem ={
-    {
-      path: '/example',
-      component: Layout,
-      redirect: '/example/table',
-      name: 'Example',
-      meta: { title: 'Example', icon: 'el-icon-s-help' },
-      children: [
-       
-      ]
-    }
-  }
 
+export const routes = resetRoute(Json)
+/**
+ * @description 处理后台返回的json文件
+ * @param {Array} data 
+ */
+function resetRoute(data){
+	//1.先对树形结构做一个统一处理
+  data.forEach(element => {
+	  if(element.frameurl){
+		element.meta = {
+			title:element.text,
+			icon:"el-icon-s-help",
+			url:element.frameurl
+		}
+	  }else{
+		element.meta = {
+			title:element.text,
+			icon:"el-icon-s-help",
+		}
+	  }
+	  element.component='';
+	  element.path="/"+py(element.text);
+	  element.name=py(element.text);
+  });
+  //2.转换成嵌套结构
+  let res = FlatToNested(data);
+  //3.处理不同的数据
+  res[0].children.forEach((child)=>{
+	first(child.children)
+  })
+  //4.查看数据
+  
+  return res
+}
+
+/**
+ * @description 对一级路由进行特殊处理
+ * @returns {
+				path: '/form',
+				component: Layout,
+				children: [
+				  {
+					path: 'index',
+					name: 'Form',
+					component:() => import('@/views/dashboard/index'),
+					meta: { title: 'Form', icon: 'form',url:'http://demo.gofusion.cn/dataanalysis/bi/page/webtools/base/DataanalysisModel.html' }
+				  }
+				]
+			  }
+ * @param {Array} firstChid 
+ */
+function first(firstChid){
+	for (let index = 0; index < firstChid.length; index++) {
+		let element = firstChid[index];
+		element.component = Layout;
+		if(element.children&&element.children.length!==0){
+			element.redirect=element.path+element.children[0].path;
+			other(element.children)
+		}else{
+			element.redirect=element.path+'/index';
+			element.children = [
+				{
+					path: 'index',
+					name: element.name,
+					component:dashboard,
+					meta:element.meta,
+				}
+			]
+		}
+	}
 }
 
 
+/**
+ * @description 对于其他路由的递归处理
+ * @param {Array} son 
+ * @returns  {
+				path: '/example',
+				component: Layout,
+				redirect: '/example/table',
+				name: 'Example',
+				meta: { title: 'Example', icon: 'el-icon-s-help' },
+				children: [
+				  {
+					path: 'tree',
+					name: 'Tree',
+					component: () => import('@/views/dashboard/index'),
+					meta: { title: 'Tree', icon: 'tree',url:'http://demo.gofusion.cn/dataanalysis/bi/page/webtools/base/DataanalysisModel.html' }
+				  }
+				]
+			  }
+ */
+function other(son){
+	for (let index = 0; index < son.length; index++) {
+		let sonItem = son[index];
+		sonItem.component = dashboard;
+		delete sonItem.id
+		delete sonItem.pid
+		delete  sonItem.frameurl
+		delete sonItem.text
+		delete sonItem.icon
+		delete sonItem.xh
+		if(sonItem.children && sonItem.children!==0){
+			other(sonItem.children)
+		}
+	}
+}
+
+
+/**
+ * 
+ * @param {Array} data 
+ * @param {Object} option 
+ */
 function FlatToNested(data, option) {
     option = option || {};
     let idProperty = option.idProperty || "id";

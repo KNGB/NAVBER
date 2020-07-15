@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
-
+import {routes} from './createRoute'
 /* Layout */
 import Layout from '@/layout'
 import dashboard from '@/views/dashboard/index'
@@ -46,7 +46,6 @@ export const constantRoutes =
       meta: { title: 'Dashboard', icon: 'dashboard' }
     }]
   },
-
   {
     path: '/example',
     component: Layout,
@@ -147,7 +146,8 @@ export const constantRoutes =
 export const ADD_ROUTE =(id)=>{
   //发送请求 
   //req(id)
-  const routes = [
+  console.log(routes);
+  const route = [
     {
         path: '/',
         redirect: '/index',  
@@ -176,7 +176,7 @@ export const ADD_ROUTE =(id)=>{
 ]
 // index  delete  new
 constantRoutes.splice(3,constantRoutes.length-3,
-  ...routes
+  ...route
 )
 resetRouter();
 }
