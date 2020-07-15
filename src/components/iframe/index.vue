@@ -26,7 +26,7 @@ export default {
     },
     iframeInit() {
       const iframe = this.$refs.iframe;
-      const clientHeight = document.documentElement.clientHeight - 50-70-34;
+      const clientHeight = document.documentElement.clientHeight - 50-70;
       iframe.style.height = `${clientHeight}px`;
       iframe.style.width = "100%";
     }

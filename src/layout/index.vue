@@ -9,7 +9,7 @@
       </div>
       <div :class="{'fixed-header':fixedHeader}">
         <navbar :isResetTheRoute="isResetTheRoute"/>
-        <tags-view :isResetTheRoute="isResetTheRoute"/>
+        <tags-view :isResetTheRoute="isResetTheRoute" v-if='false'/>
       </div>
       <app-main />
     </div>
