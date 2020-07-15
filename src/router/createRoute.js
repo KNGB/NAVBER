@@ -709,8 +709,8 @@ function first(firstChid){
 		let element = firstChid[index];
 		element.component = Layout;
 		if(element.children&&element.children.length!==0){
-			element.redirect=element.path+element.children[0].path;
-			other(element.children)
+			element.redirect=element.children[0].path;
+			other(element)
 		}else{
 			element.redirect=element.path+'/index';
 			element.children = [
@@ -746,8 +746,8 @@ function first(firstChid){
 			  }
  */
 function other(son){
-	for (let index = 0; index < son.length; index++) {
-		let sonItem = son[index];
+	for (let index = 0; index < son.children.length; index++) {
+		let sonItem = son.children[index];
 		sonItem.component = dashboard;
 		delete sonItem.id
 		delete sonItem.pid
@@ -756,7 +756,7 @@ function other(son){
 		delete sonItem.icon
 		delete sonItem.xh
 		if(sonItem.children && sonItem.children!==0){
-			other(sonItem.children)
+			other(sonItem)
 		}
 	}
 }
