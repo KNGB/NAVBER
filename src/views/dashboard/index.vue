@@ -26,7 +26,7 @@
 		methods: {},
 		computed: {
 			url(){
-				return this.$route.meta.url ||'http://test.gofusion.cn:8099/yxjjck/page/fzdl/chukou/chukou.html'
+				return 'http://demo.gofusion.cn'+this.$route.meta.url ||'http://test.gofusion.cn:8099/yxjjck/page/fzdl/chukou/chukou.html'
 			}
 		},
 		watch: {

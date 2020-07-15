@@ -1,6 +1,7 @@
 
 import Layout from '@/layout'
 import dashboard from '@/views/dashboard/index'
+
 let pinyin = require("pinyin");
 let py = (str)=>{
 

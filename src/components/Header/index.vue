@@ -51,6 +51,8 @@ import LangSelect from '@/components/LangSelect'
 import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect' 
 import {ADD_ROUTE} from '@/router'
+
+import {routes} from '@/router/createRoute'
 import router from '@/router'
 import nav from  './../../router/fast_menu.json'
 export default {
@@ -69,6 +71,7 @@ export default {
             squareUrl: "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
             index:8,
             nav,
+            isLoad:false,
         };
     },
     computed: {
@@ -92,14 +95,18 @@ export default {
             await this.$store.dispatch('user/logout')
             this.$router.push(`/login?redirect=${this.$route.fullPath}`)
         },
-        reqNav(index,item){
+        async reqNav(index,item){
             this.activeIndex=index;
             // 修改路由
-            ADD_ROUTE(item)
+            if(!this.isLoad){
+                 await ADD_ROUTE()
+                 this.isLoad=true;
+            }
             //提示导航栏的路由即将改变
-            this.$store.commit('app/SET_ROUTE',true);
+            this.$store.commit('app/SET_ROUTE',item.text);
             this.$store.dispatch('tagsView/delAllViews');
-            
+            //console.log('/'+routes.headerobj[item.text],'47555555555555555555')
+            this.$router.push(routes.headerobj[item.text])
         }
     }
 };
