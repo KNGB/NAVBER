@@ -639,6 +639,7 @@ const Json  =[{
 
 
 export const routes = resetRoute(Json)
+
 /**
  * @description 处理后台返回的json文件
  * @param {Array} data 
@@ -668,9 +669,22 @@ function resetRoute(data){
   res[0].children.forEach((child)=>{
 	first(child.children)
   })
-  //4.查看数据
+  //4.查看数据 产生数组对应关系
+  let resArr  = [];
+  let headerobj = {}
+  res[0].children.forEach((item)=>{
+	for (let index = 0; index < item.children.length; index++) {
+		const element = item.children[index];
+		element.isshow = item.text;
+		resArr.push(
+			element
+		)
+		headerobj[item.text]=element.path;
+	}
+  })
   
-  return res
+  return {resArr,headerobj}
+
 }
 
 /**
