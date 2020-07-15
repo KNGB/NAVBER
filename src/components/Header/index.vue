@@ -105,7 +105,9 @@ export default {
             //提示导航栏的路由即将改变
             this.$store.commit('app/SET_ROUTE',item.text);
             this.$store.dispatch('tagsView/delAllViews');
-            //console.log('/'+routes.headerobj[item.text],'47555555555555555555')
+            if(item.frameurl){
+                this.$router.push({path:'/shouye',query:{url:item.frameurl}})
+            }
             this.$router.push(routes.headerobj[item.text])
         }
     }
