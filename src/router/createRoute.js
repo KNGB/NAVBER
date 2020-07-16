@@ -651,13 +651,11 @@ function resetRoute(data){
 	  if(element.frameurl){
 		element.meta = {
 			title:element.text,
-			icon:"el-icon-s-help",
 			url:element.frameurl
 		}
 	  }else{
 		element.meta = {
 			title:element.text,
-			icon:"el-icon-s-help",
 		}
 	  }
 	  element.component='';
@@ -677,6 +675,7 @@ function resetRoute(data){
 	for (let index = 0; index < item.children.length; index++) {
 		const element = item.children[index];
 		element.isshow = item.text;
+		element.meta.icon = "el-icon-s-help";
 		resArr.push(
 			element
 		)
