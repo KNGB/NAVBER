@@ -85,7 +85,7 @@ export default {
         
     },
     mounted() {
-
+        this.reqNav(0,nav[0])
     },
     methods: {
         toggleSideBar() {

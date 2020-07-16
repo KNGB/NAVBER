@@ -680,8 +680,8 @@ function resetRoute(data){
 		resArr.push(
 			element
 		)
-		headerobj[item.text]=element.path;
 	}
+	headerobj[item.text]=item.children[0].path;
   })
   
   return {resArr,headerobj}
