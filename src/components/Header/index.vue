@@ -4,7 +4,7 @@
         <el-col :span="4" class="hidden-sm-and-down">
             <div class="grid-content heightToGrid">
                 <div style="width:228px;height:41px">
-                    <h1><img src="http://demo.gofusion.cn/nav/sys/systemmanager/images/backsysLogo.png" alt=""></h1>
+                    <img src="http://demo.gofusion.cn/nav/sys/systemmanager/images/backsysLogo.png" alt="">
                 </div>
             </div>
         </el-col>
@@ -16,29 +16,22 @@
             </div>
         </el-col>
         <el-col :span="4" class="hidden-sm-and-down">
-            <div class="grid-content ">
-                <div class="right-menu">
-                    <template>
-                        <screenfull id="screenfull" class="right-menu-item hover-effect" />
-
-                        <el-tooltip content="Global Size" effect="dark" placement="bottom">
-                        <size-select id="size-select" class="right-menu-item hover-effect" />
-                        </el-tooltip>
-
-                        <lang-select class="right-menu-item hover-effect" />
-                    </template>
-                    
-                    <el-dropdown>
-                    <span class="el-dropdown-link">
-                        <div class="right-menu-item"><el-avatar shape="square"  :src="squareUrl"></el-avatar></div>
-                    </span>
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item @click.native="logout">Log In</el-dropdown-item>
-                        <el-dropdown-item divided  @click.native="logout">Log Out</el-dropdown-item>
-                    </el-dropdown-menu>
-                    </el-dropdown>
-                    </div>
-            </div>
+                <div class="touxiang">
+                        <div class="imgItem"> </div>
+                        <span><a href="">系统首页</a></span>
+                        <el-divider direction="vertical"></el-divider>
+                        <div class="imgTouxiang">
+                            
+                        </div>
+                        <el-dropdown>
+                        <span class="el-dropdown-link">
+                            小明<i class="el-icon-arrow-down el-icon--right"></i>
+                        </span>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item>退出系统</el-dropdown-item>
+                        </el-dropdown-menu>
+                        </el-dropdown>
+                </div>
         </el-col>
     </el-row>
     <!-- <button @click="add()">增加路由</button> -->
@@ -114,69 +107,64 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .Header{
-    background: #304156f3;
+    background: #121931;
     width: 100%;
-    height: 70px;
+    height: 55px;
     z-index: 200;
     overflow-x: auto;
+    overflow-y: hidden;
+    line-height: 55px;
+    color: #d5dbf3;
+    font-size: 16px;
     .heightToGrid{
-        height: 70px;
+        height: 55px;
         display: flex;
         justify-content: center;
         
         align-items: center;
-        color: #BFCBD9;
-        h1{
-            overflow: hidden;
-            white-space:nowrap;
-            margin: 0;
-        }
+        color: #d5dbf3;
+        
     }
     .navItem{
-        height: 70px;
-        line-height: 70px;
+        height: 55px;
+        line-height: 55px;
         text-align: center;
         //padding: 0 10px;
         flex-grow:1;// Average allocation of surplus space
         &:hover{
-            background-color:  #29384b;
+            background-color:  #183158;
         }
     }
     .active{
-        background: #304156f3;
+        background: #183158;
     }
-    .right-menu {
-        height: 70px;
-        line-height: 70px;
-        overflow: hidden;
+    
+    .touxiang{
+        font-size: 14px;
         float: right;
-        &:focus {
-        outline: none;
-        }
-        .right-menu-item {
+        height: 100%;width:142px ;
+        margin-right: 20px;
+        position: relative;
+        .imgTouxiang{
         display: inline-block;
-        padding: 0 8px;
-        height: 70px;
-        font-size: 18px;
-        color: #BFCBD9;
+        width: 25px;
+        height: 25px;
+        line-height: 55px;
         vertical-align: middle;
-        line-height: 70px;
-        span{
-            vertical-align: middle;
-            line-height: 70px!important;
+        margin-right: 10px;
         }
-        &.hover-effect {
-            cursor: pointer;
-            transition: background .3s;
-
-            &:hover {
-            background: rgba(0, 0, 0, .025)
-            }
+        .imgItem{
+            position: absolute;
+            left: 78px;
+            top: 15px;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: url('./../../assets/sp.png') -7px -44px;
+            z-index: 201;
         }
-        }
-        
     }
 }
   .grid-content {
