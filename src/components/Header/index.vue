@@ -85,7 +85,10 @@ export default {
             this.userMes = nameData.data;
         }
         //Navicat 赋值
-
+        //
+        if(this.nav[this.activeIndex].frameurl){
+            this.$store.commit('app/SET_URL',this.nav[this.activeIndex].frameurl);
+        }
     },
     mounted() {
         
@@ -112,8 +115,10 @@ export default {
             this.$store.commit('app/SET_ROUTE',item.text);
             this.$store.dispatch('tagsView/delAllViews');
             if(item.frameurl){
+                this.$store.commit('app/SET_URL',item.frameurl);
                // this.$router.push({path:'/shouye',query:{url:item.frameurl}})
                 this.$router.replace('/shouye')
+                
             }
             this.$router.push(routes.headerobj[item.text])
         }

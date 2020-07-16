@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   name: "page",
   
@@ -12,9 +13,9 @@ export default {
     };
   },
   computed: {
-			url(){
-				return 'http://demo.gofusion.cn/nav/sys/overview/overView.html'
-			}
+    ...mapState({
+      url: state => "http://demo.gofusion.cn"+state.app.url
+    }),
 	},
   mounted() {
     this.resize();
@@ -31,7 +32,7 @@ export default {
     },
     iframeInit() {
       const iframe = this.$refs.iframe;
-      const clientHeight = document.documentElement.clientHeight-60;
+      const clientHeight = document.documentElement.clientHeight-55;
       iframe.style.height = `${clientHeight}px`;
       iframe.style.width = "100%";
     }

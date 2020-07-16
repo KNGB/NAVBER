@@ -9,7 +9,7 @@ const state = {
   language: getLanguage(),
   size: Cookies.get('size') || 'medium',
   routeReset:false,
-  url:''
+  url:'/nav/sys/overview/overView.html'
 }
 
 const mutations = {
