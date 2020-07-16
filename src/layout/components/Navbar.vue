@@ -5,7 +5,7 @@
     <breadcrumb class="breadcrumb-container" />
     <div class="right-menu">
       <template v-if="device!=='mobile'">
-        <div class="right-menu-item" style="line-height: 47px;">
+        <div class="right-menu-item" style="line-height: 47px;" @click="openNewWin()">
           <img src="@/assets/newWindow.png" alt="">
         </div>
         <screenfull id="screenfull" class="right-menu-item hover-effect" />
@@ -45,6 +45,9 @@ export default {
     async logout() {
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    },
+    openNewWin(){
+      window.open(window.location.href);
     }
   }
 }
