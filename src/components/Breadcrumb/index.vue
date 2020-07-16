@@ -58,7 +58,7 @@ export default {
     handleLink(item) {
       const { path } = item
       
-      this.$router.push(path)
+      this.$router.replace(path)
     }
   }
 }

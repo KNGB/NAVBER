@@ -23,12 +23,12 @@
                         <div class="imgTouxiang">
                             <div class="imgItem"> </div>
                         </div>
-                        <el-dropdown>
+                        <el-dropdown @command="handleCommand">
                         <span class="el-dropdown-link">
                             {{userMes.loginName?userMes.loginName:'请先登录'}}<i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item>退出系统</el-dropdown-item>
+                            <el-dropdown-item command="logout">退出系统</el-dropdown-item>
                         </el-dropdown-menu>
                         </el-dropdown>
                 </div>
@@ -98,11 +98,12 @@ export default {
     },
     methods: {
         toggleSideBar() {
-            this.$store.dispatch('app/toggleSideBar')
-            },
-        async logout() {
-            await this.$store.dispatch('user/logout')
-            this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+        this.$store.dispatch('app/toggleSideBar')
+        },
+        handleCommand(command) {
+            if(command==="logout"){
+                 window.location.href='http://demo.gofusion.cn:8085/login.html';
+            }
         },
         async reqNav(index,item){
             this.activeIndex=index;
@@ -116,11 +117,10 @@ export default {
             this.$store.dispatch('tagsView/delAllViews');
             if(item.frameurl){
                 this.$store.commit('app/SET_URL',item.frameurl);
-               // this.$router.push({path:'/shouye',query:{url:item.frameurl}})
                 this.$router.replace('/shouye')
                 
             }
-            this.$router.push(routes.headerobj[item.text])
+            this.$router.replace(routes.headerobj[item.text])
         }
     }
 };
