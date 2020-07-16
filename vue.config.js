@@ -36,6 +36,22 @@ module.exports = {
       warnings: false,
       errors: true
     },
+    proxy: {
+			'/api': 
+			{
+				target: 'http://demo.gofusion.cn',
+				changeOrigin: true,
+        autoRewrite: true,
+        pathRewrite: {
+          '/api': ''
+        }
+			},
+			'/login': {
+				target: 'http://zgcchy.f3322.net:9000/',
+				changeOrigin: true,
+				autoRewrite: true
+			}
+		}
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that

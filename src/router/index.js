@@ -41,21 +41,20 @@ export const constantRoutes =
     redirect: '/shouye',
   },
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  { path: '*', redirect: '/shouye', hidden: true }
 ]
-console.log(routes);
 export const ADD_ROUTE =(id)=>{
   //发送请求 
   //req(id)
   console.log(routes);
   if(constantRoutes.length>routes.resArr.length){
     // index  delete  new
-    constantRoutes.splice(1,0,
+    constantRoutes.splice(5,0,
       ...routes.resArr
     )
   }else{
     // index  delete  new
-    constantRoutes.splice(1,routes.resArr.length,
+    constantRoutes.splice(5,routes.resArr.length,
       ...routes.resArr
     )
   }

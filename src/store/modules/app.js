@@ -9,6 +9,7 @@ const state = {
   language: getLanguage(),
   size: Cookies.get('size') || 'medium',
   routeReset:false,
+  url:''
 }
 
 const mutations = {
@@ -39,6 +40,9 @@ const mutations = {
   },
   SET_ROUTE:(state, routeReset)=>{
     state.routeReset = routeReset;
+  },
+  SET_URL:(state, url)=>{
+    state.url = url;
   }
 }
 

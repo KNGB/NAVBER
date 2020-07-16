@@ -17,15 +17,15 @@
         </el-col>
         <el-col :span="4" class="hidden-sm-and-down">
                 <div class="touxiang">
-                        <div class="imgItem"> </div>
-                        <span><a href="">系统首页</a></span>
+                        
+                        <span><a href="http://demo.gofusion.cn/nav/portal/homePage.html" >系统首页</a></span>
                         <el-divider direction="vertical"></el-divider>
                         <div class="imgTouxiang">
-                            
+                            <div class="imgItem"> </div>
                         </div>
                         <el-dropdown>
                         <span class="el-dropdown-link">
-                            小明<i class="el-icon-arrow-down el-icon--right"></i>
+                            {{userMes.loginName?userMes.loginName:'请先登录'}}<i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>退出系统</el-dropdown-item>
@@ -48,6 +48,7 @@ import {ADD_ROUTE} from '@/router'
 import {routes} from '@/router/createRoute'
 import router from '@/router'
 import nav from  './../../router/fast_menu.json'
+import {getFastMenuReq,reqLoginName} from './../../api'
 export default {
     name: "",
     components: {
@@ -60,11 +61,10 @@ export default {
     props: [],
     data() {
         return {
-            activeIndex:4,
-            squareUrl: "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
-            index:8,
+            activeIndex:0,
             nav,
             isLoad:false,
+            userMes:{}
         };
     },
     computed: {
@@ -74,11 +74,24 @@ export default {
         ]),
     },
     watch: {},
-    created() {
-        
+    async created() {
+        //发送请求 获取json 
+        //let result = await getFastMenuReq()
+        let nameData = await reqLoginName()
+
+        //处理数据
+        //console.log('ssssssssssssssssssssssss',result)
+        if(nameData.code==200){
+            this.userMes = nameData.data;
+        }
+        //Navicat 赋值
+
     },
     mounted() {
-        this.reqNav(0,nav[0])
+        
+    },
+    beforeUpdate(){
+      
     },
     methods: {
         toggleSideBar() {
@@ -95,11 +108,12 @@ export default {
                  await ADD_ROUTE()
                  this.isLoad=true;
             }
-            //提示导航栏的路由即将改变
+            //提示导航栏的路由即将改变 通过文字匹配
             this.$store.commit('app/SET_ROUTE',item.text);
             this.$store.dispatch('tagsView/delAllViews');
             if(item.frameurl){
-                this.$router.push({path:'/shouye',query:{url:item.frameurl}})
+               // this.$router.push({path:'/shouye',query:{url:item.frameurl}})
+                this.$router.replace('/shouye')
             }
             this.$router.push(routes.headerobj[item.text])
         }
@@ -144,9 +158,8 @@ export default {
     .touxiang{
         font-size: 14px;
         float: right;
-        height: 100%;width:142px ;
+        height: 100%;
         margin-right: 20px;
-        position: relative;
         .imgTouxiang{
         display: inline-block;
         width: 25px;
@@ -154,11 +167,10 @@ export default {
         line-height: 55px;
         vertical-align: middle;
         margin-right: 10px;
+        position: relative;
         }
         .imgItem{
             position: absolute;
-            left: 78px;
-            top: 15px;
             width: 25px;
             height: 25px;
             border-radius: 50%;

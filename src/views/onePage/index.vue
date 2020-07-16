@@ -13,7 +13,7 @@ export default {
   },
   computed: {
 			url(){
-				return 'http://demo.gofusion.cn'+this.$route.query.url ||'http://test.gofusion.cn:8099/yxjjck/page/fzdl/chukou/chukou.html'
+				return 'http://demo.gofusion.cn/nav/sys/overview/overView.html'
 			}
 	},
   mounted() {
