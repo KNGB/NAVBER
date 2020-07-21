@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
-import {routes} from './createRoute'
+import {resetRoute} from './createRoute'
 /* Layout */
 import Layout from '@/layout'
 import dashboard from '@/views/dashboard/index'
@@ -41,11 +41,12 @@ export const constantRoutes =
     redirect: '/shouye',
   },
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/shouye', hidden: true }
+  { path: '*', redirect: '/404', hidden: true }
 ]
-export const ADD_ROUTE =(id)=>{
+export const ADD_ROUTE =async ()=>{
   //发送请求 
   //req(id)
+  const routes = await resetRoute()
   console.log(routes);
   if(constantRoutes.length>routes.resArr.length){
     // index  delete  new
@@ -58,8 +59,8 @@ export const ADD_ROUTE =(id)=>{
       ...routes.resArr
     )
   }
-
 resetRouter();
+return routes.headerobj
 }
 const createRouter = () => new Router({
   scrollBehavior: () => ({ y: 0 }),

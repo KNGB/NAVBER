@@ -14,7 +14,7 @@ export default {
   },
   computed: {
     ...mapState({
-      url: state => "http://demo.gofusion.cn"+state.app.url
+      url: state => state.app.url
     }),
 	},
   mounted() {

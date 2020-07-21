@@ -52,7 +52,8 @@ export default {
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     },
     openNewWin(){
-      window.open("http://demo.gofusion.cn"+this.$route.meta.url);
+     // window.open("http://data.gofusion.cn"+this.$route.meta.url);
+      window.open(this.$route.meta.url);
     }
   }
 }
